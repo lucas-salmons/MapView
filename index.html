@@ -11,6 +11,12 @@
         bottom: 0;
         left: 0;
         right: 0;
+        z-index: -1;
+      }
+      #nav {
+        position: relative;
+        z-index: 1;
+        align-content: center;
       }
     </style>
     <link
@@ -21,6 +27,13 @@
   </head>
 
   <body>
+    <!--navigation input with button that takes to destination -->
+    <div id="nav">
+      <p>Latitude and Longitute:</p>
+      <input type="text" name="latLng" id="latLng" />
+      <input type="button" onclick="zoomTo()" value="GoTo" />
+    </div>
+
     <div id="map"></div>
     <script>
       var map = L.map("map", {
@@ -32,6 +45,13 @@
         attribution:
           '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
       }).addTo(map);
+      //drives the navigation input value is split to a string as leaflet panTo requires an array
+      function zoomTo() {
+        var inputLocation = document.getElementById("latLng").value;
+        var locationArray = inputLocation.split(",");
+        console.log(locationArray);
+        map.panTo(new L.latLng(locationArray));
+      }
     </script>
   </body>
 </html>
