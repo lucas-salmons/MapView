@@ -37,8 +37,26 @@
       defer
     ></script>
     <script type="text/javascript">
+      //default Bing Maps position
       function GetMap() {
-        var map = new Microsoft.Maps.Map("#microMap");
+        var map = new Microsoft.Maps.Map("#microMap", {
+          center: new Microsoft.Maps.Location(47.608013, -122.335167),
+          zoom: 13
+        });
+      }
+      //move Bing Maps to input position
+      function updateBing() {
+        var inputLocation = document.getElementById("latLng").value;
+        var locationArray = inputLocation.split(",");
+        console.log(inputLocation);
+        //update the center location for the map using the numbers from the input text and return the new map
+        var map = new Microsoft.Maps.Map("#microMap", {
+          center: new Microsoft.Maps.Location(
+            locationArray[0],
+            locationArray[1]
+          ),
+          zoom: 13
+        });
       }
     </script>
   </head>
@@ -48,7 +66,8 @@
     <div id="nav">
       <p>Latitude and Longitute:</p>
       <input type="text" name="latLng" id="latLng" />
-      <input type="button" onclick="zoomTo()" value="GoTo" />
+      <input type="button" onclick="zoomTo()" value="Go To" />
+      <input type="button" onclick="updateBing()" value="Set Bing" />
     </div>
     <div class="col-6" id="map"></div>
     <div class="col-6 offset-6" id="microMap"></div>
