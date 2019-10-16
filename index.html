@@ -5,7 +5,8 @@
     <title>Map Viewer</title>
 
     <style>
-      #map {
+      #map,
+      #microMap {
         float: left;
         position: absolute;
         height: 100%;
@@ -20,9 +21,26 @@
     </style>
     <link
       rel="stylesheet"
+      href="node_modules/bootstrap/dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
       href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
     />
+    <!--Reference to Leaflet Library-->
     <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>
+    <!-- Reference to the Bing Maps SDK -->
+    <script
+      type="text/javascript"
+      src="http://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=[Your Key]"
+      async
+      defer
+    ></script>
+    <script type="text/javascript">
+      function GetMap() {
+        var map = new Microsoft.Maps.Map("#microMap");
+      }
+    </script>
   </head>
 
   <body>
@@ -32,7 +50,8 @@
       <input type="text" name="latLng" id="latLng" />
       <input type="button" onclick="zoomTo()" value="GoTo" />
     </div>
-    <div id="map"></div>
+    <div class="col-6" id="map"></div>
+    <div class="col-6 offset-6" id="microMap"></div>
     <script src="js/script.js"></script>
   </body>
 </html>
