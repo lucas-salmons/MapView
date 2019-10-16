@@ -2,19 +2,18 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>side-by-side</title>
+    <title>Map Viewer</title>
 
     <style>
       #map {
+        float: left;
         position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
+        height: 100%;
+        width: 100%;
         z-index: -1;
       }
       #nav {
-        position: relative;
+        position: absolute;
         z-index: 1;
         align-content: center;
       }
@@ -33,25 +32,7 @@
       <input type="text" name="latLng" id="latLng" />
       <input type="button" onclick="zoomTo()" value="GoTo" />
     </div>
-
     <div id="map"></div>
-    <script>
-      var map = L.map("map", {
-        center: [47.608013, -122.335167],
-        zoom: 12
-      });
-
-      L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-        attribution:
-          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-      }).addTo(map);
-      //drives the navigation input value is split to a string as leaflet panTo requires an array
-      function zoomTo() {
-        var inputLocation = document.getElementById("latLng").value;
-        var locationArray = inputLocation.split(",");
-        console.log(locationArray);
-        map.panTo(new L.latLng(locationArray));
-      }
-    </script>
+    <script src="js/script.js"></script>
   </body>
 </html>
